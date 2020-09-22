@@ -5,19 +5,12 @@
     <v-card v-if="openOsirisRegister">
       <v-card-text>
         <div class="display-1 text--primary">
-          <p>오시리스 리그</p>
-        </div>
-        <div>
-          <p>-------[ AP : 시간 미정 ]-------</p>
-        </div>
-        <br>
-        <br>
-        <div class="display-1 text--primary">
           <p>오시리스 관</p>
         </div>
         <div>
-          <p>-------[ GP : 일 (8/16) 9시 ]-------</p>
-          <p>-------[ Gp : 일 (8/16) 11시 ]-------</p>
+          <p>-------[ AP : 토 (9/26) 10시 ]-------</p>
+          <p>-------[ GP : 일 (9/27) 9시 ]-------</p>
+          <p>-------[ Gp : 일 (9/27) 11시 ]-------</p>
         </div>
         <br>
         <br>

@@ -25,7 +25,7 @@
                 <v-list-item class="my-tile" v-for="member in group.members" :key="member.nickname">
                   <v-list-item-content inline> 
                     <div>
-                    {{ member.nickname }} <span style="color:#BFBFBF"> - {{ addComma(member.power[0].value) }} </span>
+                    {{ member.nickname }} <span style="color:#BFBFBF"> - {{ addComma(member.power) }} </span>
                     </div>
                   </v-list-item-content>
                 </v-list-item>
@@ -71,9 +71,15 @@ export default {
     save() {
           
     },
-    addComma(num) {
-      var reg = /\B(?=(\d{3})+(?!\d))/g;
-      return num.toString().replace(reg,',');
+    addComma(power) {
+      const newone = (power.find(e => e.key === "(9.7)전투력"));
+      if (newone) {
+        const num = newone.value;
+        var reg = /\B(?=(\d{3})+(?!\d))/g;
+        return num.toString().replace(reg,',');
+      } else {
+        return "NaN";
+      }
     },
     close() {
       this.dialog = false;

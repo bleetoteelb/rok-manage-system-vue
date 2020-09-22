@@ -14,14 +14,21 @@
           <v-container>
             <v-row>
               <v-col xs12 sm6 md4> 
-                <v-text-field v-model="editedItem.id">
+                <v-text-field v-model="editedItem.nickname">
                   <template v-slot:label>
                     닉네임 <strong style="color:orangered;">*</strong>
                   </template>
                 </v-text-field>
               </v-col>
               <v-col xs12 sm6 md4> 
-                <v-text-field v-model="editedItem.pw">
+                <v-text-field v-model="editedItem.key">
+                  <template v-slot:label>
+                    전투력key <strong style="color:orangered;">*</strong>
+                  </template>
+                </v-text-field>
+              </v-col>
+              <v-col xs12 sm6 md4> 
+                <v-text-field v-model="editedItem.power">
                   <template v-slot:label>
                     전투력 <strong style="color:orangered;">*</strong>
                   </template>
@@ -73,28 +80,26 @@ export default {
       { text: '(8.17)5티처치', align: 'end', sortable: true, value: 'kill[5].value',width:"170px" },
       { text: '(8.24)4티처치', align: 'end', sortable: true, value: 'kill[6].value',width:"170px" },
       { text: '(8.24)5티처치', align: 'end', sortable: true, value: 'kill[7].value',width:"170px" },
-      { text: '4티처치변동', align: 'end', sortable: true, value: 'test(kill[6].value,kill[0].value)',width:"170px" },
-      { text: '5티처치변동', align: 'end', sortable: true, value: 'kill[7].value-kill[1].value',width:"170px" },
       { text: '(8.9)전사', align: 'end', sortable: true, value: 'death[0].value',width:"170px" },
       { text: '(8.13)전사', align: 'end', sortable: true, value: 'death[1].value',width:"170px" },
       { text: '(8.17)전사', align: 'end', sortable: true, value: 'death[2].value',width:"170px" },
       { text: '(8.24)전사', align: 'end', sortable: true, value: 'death[3].value',width:"170px" },
-      { text: '전사변동', align: 'end', sortable: true, value: 'death[3].value-death[0].value',width:"170px" },
       { text: '(8.9)원조', align: 'end', sortable: true, value: 'give[0].value',width:"170px" },
       { text: '(8.13)원조', align: 'end', sortable: true, value: 'give[1].value',width:"170px" },
       { text: '(8.24)원조', align: 'end', sortable: true, value: 'give[2].value',width:"170px" },
-      { text: '원조변동', align: 'end', sortable: true, value: 'give[2].value-give[0].value',width:"170px" },
     ],
-    editedItem: [],
+    editedItem: {
+      nickname: "",
+      key: "",
+      power: ""
+    },
+    defaultItem: {},
     checkAdmin: false,
     dialog: false,
 
   }),
   created() {
     this.getInformation()
-    String.prototype.format = function() {
-      return this+",,,,,";
-    }
   },
   computed: {
     test: (a,b) => {
@@ -107,11 +112,18 @@ export default {
       this.$http.get("api/member/").then(response => {
         this.userList = response.data.data;
       });
+      this.$http.get("api/showlist/").then(response => {
+        this.userList = response.data.data;
+      });
     },
     save() {
-      console.log(this.userList[0].nickname);
-      console.log(this.userList[1].power['(8.9)전투력']);
-      console.log(this.userList[2]);
+      this.$http.post("api/osiris/group". this.editedItem).then(response => {
+        console.log(response.data.data);
+        this.froups.push(this.editeItem);
+        this.dialog=false;
+      }, error => {
+        console.log(error);
+      });
     },
     close() {
       this.dialog = false;

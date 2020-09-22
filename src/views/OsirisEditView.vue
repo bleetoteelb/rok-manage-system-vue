@@ -54,12 +54,8 @@
                    disable-pagination
                    :hide-default-footer="true"
                    class="elevation-1">
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }} </td>
-        <td>{{ props.item.time }} </td>
-        <td>
-          <v-icon medium class="mr-2" @click="deleteItem(props.item)">delete</v-icon>
-        </td>
+      <template v-slot:item.delete="{ item }">
+          <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
       </template>
     </v-data-table>
     </v-container>
@@ -111,7 +107,14 @@ export default {
       this.editedIndex = this.groups.indexOf(item);
     },
     deleteItem(item) {
-
+      const data = { _id: item._id };
+      console.log(data);
+      this.$http({url: "api/osiris/group", method: 'DELETE', data:  data}).then(response => {
+        const index = this.groups.indexOf(item);
+        this.groups.splice(index, 1);
+      }, error => {
+        console.log(error);
+      });
     },
     changeOsirisRegister(){
       const data = {openOsirisRegister: this.openOsirisRegister,_id:this._id};
