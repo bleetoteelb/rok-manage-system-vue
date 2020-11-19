@@ -52,6 +52,21 @@ const routes = [
     path: '/osiris-edit',
     name: 'osiris-edit',
     component: () => import(/* webpackChunkName: "about" */ '../views/OsirisEditView.vue')
+  },
+  {
+    path: '/profile-pictures',
+    name: 'profile-pictures',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ProfilePictures.vue')
+  },
+  {
+    path: '/kvk',
+    name: 'kvk',
+    component: () => import(/* webpackChunkName: "about" */ '../views/KvkView.vue')
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Test.vue')
   }
 ]
 

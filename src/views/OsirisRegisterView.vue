@@ -8,15 +8,18 @@
           <p>오시리스 관</p>
         </div>
         <div>
-          <p>-------[ AP : 토 (9/26) 10시 ]-------</p>
-          <p>-------[ GP : 일 (9/27) 9시 ]-------</p>
-          <p>-------[ Gp : 일 (9/27) 11시 ]-------</p>
+          <p style="color:red;">LS는 고정멤버만 신청 가능</p>
+          <p>-------[ 65LS : 일 (11/22) 23시 ]-------</p>
+          <p>-------[ 65MH : 일 (11/22) 21시 ]-------</p>
+          <p>-------[ 65AP : 토 (11/21) 22시 ]-------</p>
+          <p>-------[ 65NH : 토 (11/21) 23시 ]-------</p>
         </div>
         <br>
         <br>
         <div>
-          <p style="color:red;">검색되는 닉네임만 등록가능(등록문의:강철무지갱)</p>
-          <p style="color:red;">띄어쓰기에 유의해주세요!!</p>
+          <p style="color:blue;">검색되는 닉네임만 등록가능 (등록문의:그럴줄알고맴매챙겨따)</p>
+          <p style="color:blue;">띄어쓰기에 유의해주세요!!</p>
+          <p style="color:red;">등록을 취소하려면, 연맹을 선택하지 않고 등록버튼을 눌러주세요!</p>
         </div>
         <br>
         <v-container>
@@ -95,7 +98,7 @@ export default {
     },
     register() {
       if(this.dropdownMember.indexOf(this.selectedMember) == -1) {
-        this.msg = `${this.selectedMember} 는 등록되어있지 않습니다. 무지갱에게 문의해주세요`
+        this.msg = `${this.selectedMember} 는 등록되어있지 않습니다. 맴매에게 문의해주세요`
         return;
       }
       const data = { nickname: this.selectedMember, group: this.selectedGroup };
@@ -103,14 +106,11 @@ export default {
         if(response.data.msg === "OVER"){
           this.msg = '신청인원이 초과되었습니다.';
           this.isOver=true;
-        } else if(response.data.msg === "NEW"){
-          this.msg = `${this.selectedMember} 이 ${this.selectedGroup}에 새로 등록되었습니다.`
-          this.isOver=false;
+          alert('신청인원이 초과되었습니다.');
         } else {
-          this.msg = `${this.selectedMember} 이 ${this.selectedGroup}으로 변경되었습니다.`
+          this.msg = `${this.selectedMember} 이 ${this.selectedGroup}에 등록되었습니다.`
           this.isOver=false;
-        }
-        console.log(response.data.data);
+        } 
       }, error => {
         console.log(error);
       }

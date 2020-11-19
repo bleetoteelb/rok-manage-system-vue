@@ -25,7 +25,9 @@
                 <v-list-item class="my-tile" v-for="member in group.members" :key="member.nickname">
                   <v-list-item-content inline> 
                     <div>
+                      <input type="checkbox" >
                     {{ member.nickname }} <span style="color:#BFBFBF"> - {{ addComma(member.power) }} </span>
+                      </input>
                     </div>
                   </v-list-item-content>
                 </v-list-item>
@@ -55,11 +57,17 @@ export default {
     getInformation() {
       this.$http.get("api/osiris/member").then(response => {
         this.groups = response.data.data;
+        
         console.log(response.data.data);
+        this.groups.forEach(e => {
+          console.log(e);
+          e.members.sort(function(a,b) {
+            return b.power[0].value - a.power[0].value;
+          })
+        });
       });
       this.$http.get("api/config").then(response => {
         this.openOsiris = response.data.data.openOsiris;
-        console.log(response.data.data);
       });
     },
     editItem(item) {
@@ -72,9 +80,9 @@ export default {
           
     },
     addComma(power) {
-      const newone = (power.find(e => e.key === "(9.7)전투력"));
-      if (newone) {
-        const num = newone.value;
+      //const newone = (power.find(e => e.key === "11.05"));
+      if (power[0]) {
+        const num = power[0].value;
         var reg = /\B(?=(\d{3})+(?!\d))/g;
         return num.toString().replace(reg,',');
       } else {

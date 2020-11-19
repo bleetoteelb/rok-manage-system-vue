@@ -58,7 +58,7 @@
       color=rgba(26,97,153,1.0)
     >
       <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="white--text">65AP 압또오오오오</v-toolbar-title>
+      <v-toolbar-title class="white--text">65LS 미친물개들의 오시리스관~</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -66,7 +66,7 @@
     </v-main>
 
     <v-footer app>
-      <span>&copy; {{ new Date().getFullYear() }}  ||  버그문의: 강철무지갱</span>
+      <span>&copy; {{ new Date().getFullYear() }}  ||  버그문의: 그럴줄알고맴매챙겨따</span>
     </v-footer>
   </v-app>
 </template>
@@ -80,10 +80,20 @@
       drawer: null,
       logo: require("@/assets/logo.png"),
       isAdmin: false,
-      items: [{
+      items: [
+        /*{
         icon: 'mdi-view-dashboard',
         text: '개인 정보',
         url: '/member'
+      },*/
+      {
+        icon: 'mdi-view-dashboard',
+        text: '물개 프사들',
+        url: '/profile-pictures'
+      },{
+        icon: 'mdi-view-dashboard',
+        text: '빛과 어둠 설명',
+        url: '/kvk'
       },{
         icon: 'mdi-view-dashboard',
         text: '오시리스 신청',

@@ -55,6 +55,19 @@
                  disable-pagination
                  :hide-default-footer="true"
                  class="elevation-1">
+      <template v-slot:item.group="{ item }">
+          <tr>
+        <td>
+        <span v-if="item.group">{{ item.group }} </span>
+        <v-icon v-if="item.group" @click="deleteMemberGroup(item)">mdi-delete</v-icon>
+        </td>
+          </tr>
+      </template>
+      <template v-slot:item.edit="{ item }">
+        <v-icon @click="editMember(item)">mdi-pencil</v-icon>
+        /
+        <v-icon @click="deleteMember(item)">mdi-delete</v-icon>
+      </template>
       </v-data-table>
     </v-container>
   </v-container>
@@ -71,28 +84,18 @@ export default {
         value: 'nickname',
         width:"200px"
       },
-      { text: '(8.9)전투력', align: 'end', sortable: true, value: 'power[0].value',width:"170px" },
-      { text: '(8.9)4티처치', align: 'end', sortable: true, value: 'kill[0].value',width:"170px" },
-      { text: '(8.9)5티처치', align: 'end', sortable: true, value: 'kill[1].value',width:"170px" },
-      { text: '(8.13)4티처치', align: 'end', sortable: true, value: 'kill[2].value',width:"170px" },
-      { text: '(8.13)5티처치', align: 'end', sortable: true, value: 'kill[3].value',width:"170px" },
-      { text: '(8.17)4티처치', align: 'end', sortable: true, value: 'kill[4].value',width:"170px" },
-      { text: '(8.17)5티처치', align: 'end', sortable: true, value: 'kill[5].value',width:"170px" },
-      { text: '(8.24)4티처치', align: 'end', sortable: true, value: 'kill[6].value',width:"170px" },
-      { text: '(8.24)5티처치', align: 'end', sortable: true, value: 'kill[7].value',width:"170px" },
-      { text: '(8.9)전사', align: 'end', sortable: true, value: 'death[0].value',width:"170px" },
-      { text: '(8.13)전사', align: 'end', sortable: true, value: 'death[1].value',width:"170px" },
-      { text: '(8.17)전사', align: 'end', sortable: true, value: 'death[2].value',width:"170px" },
-      { text: '(8.24)전사', align: 'end', sortable: true, value: 'death[3].value',width:"170px" },
-      { text: '(8.9)원조', align: 'end', sortable: true, value: 'give[0].value',width:"170px" },
-      { text: '(8.13)원조', align: 'end', sortable: true, value: 'give[1].value',width:"170px" },
-      { text: '(8.24)원조', align: 'end', sortable: true, value: 'give[2].value',width:"170px" },
+      { text: '_id', align: 'end', sortable: true, value: '_id',width:"170px" },
+      { text: '오시그룹', align: 'end', sortable: true, value: 'group',width:"170px" },
+      { text: '10.05', align: 'end', sortable: true, value: 'power[0].value',width:"170px" },
+      { text: '10.21', align: 'end', sortable: true, value: 'power[1].value',width:"170px" },
+      { text: '편집/삭제', sortable: true, value: 'edit',width:"170px" },
     ],
     editedItem: {
       nickname: "",
       key: "",
       power: ""
     },
+    editedIndex: -1,
     defaultItem: {},
     checkAdmin: false,
     dialog: false,
@@ -103,7 +106,6 @@ export default {
   },
   computed: {
     test: (a,b) => {
-      console.log('asdf');
       return b-a;
     }
   },
@@ -117,9 +119,9 @@ export default {
       });
     },
     save() {
-      this.$http.post("api/osiris/group". this.editedItem).then(response => {
+      this.$http.post("api/member/", this.editedItem).then(response => {
         console.log(response.data.data);
-        this.froups.push(this.editeItem);
+        this.userList.push(this.editeItem);
         this.dialog=false;
       }, error => {
         console.log(error);
@@ -127,6 +129,30 @@ export default {
     },
     close() {
       this.dialog = false;
+    },
+    deleteMemberGroup(item) {
+      this.$http({url:"api/osiris/member", method: 'DELETE', data: {_id: item._id}}).then(response => {
+        this.dialog=false;
+      }, error => {
+        console.log(error);
+      });
+    },
+    deleteMember(item) {
+      this.$http({url:"api/member", method: 'DELETE', data: {_id: item._id}}).then(response => {
+        this.dialog=false;
+      }, error => {
+        console.log(error);
+      });
+    },
+    editMember(item) {
+      patchMember()
+    },
+    patchMember() {
+      this.$http({url:"api/member", method: 'PATCH', data: {_id: item._id}}).then(response => {
+        this.dialog=false;
+      }, error => {
+        console.log(error);
+      });
     },
     numFormat(val) {
       if(val==0) return 0;
