@@ -58,7 +58,7 @@
       color=rgba(26,97,153,1.0)
     >
       <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="white--text">65LS 미친물개들의 오시리스관~</v-toolbar-title>
+      <v-toolbar-title class="white--text">65LS - 미친 물개들  </v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -81,24 +81,23 @@
       logo: require("@/assets/logo.png"),
       isAdmin: false,
       items: [
-        /*{
-        icon: 'mdi-view-dashboard',
-        text: '개인 정보',
-        url: '/member'
-      },*/
       {
-        icon: 'mdi-view-dashboard',
+        icon: 'mdi-emoticon-excited',
         text: '물개 프사들',
         url: '/profile-pictures'
       },{
-        icon: 'mdi-view-dashboard',
-        text: '빛과 어둠 설명',
-        url: '/kvk'
-      },{
-        icon: 'mdi-view-dashboard',
+        icon: 'mdi-clipboard-account',
         text: '오시리스 신청',
         url: '/osiris-register'
-      },
+      },{
+        icon: 'mdi-alert-octagon',
+        text: 'LS 제제 내역',
+        url: '/member-violate'
+      },{
+        icon: 'mdi-account-multiple',
+        text: '정보 업데이트',
+        url: '/member-update'
+      }
       ],
       adminItems: [{
         icon: 'mdi-view-dashboard',

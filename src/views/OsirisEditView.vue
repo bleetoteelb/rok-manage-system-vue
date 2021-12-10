@@ -55,6 +55,8 @@
                    :hide-default-footer="true"
                    class="elevation-1">
       <template v-slot:item.delete="{ item }">
+          <v-icon @click="editItem(item)">mdi-pencil</v-icon>
+          /
           <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
       </template>
     </v-data-table>
@@ -74,6 +76,7 @@ export default {
     ],
     editedItem: {},
     editedIndex: -1,
+    defaultItem: {},
     openOsiris: false,
     openOsirisRegister: false,
     osirisPower: "",
@@ -105,6 +108,8 @@ export default {
     },
     editItem(item) {
       this.editedIndex = this.groups.indexOf(item);
+      this.editedItem = Object.assign({},this.groups[this.editedIndex]);
+      this.dialog = true;
     },
     deleteItem(item) {
       const data = { _id: item._id };
@@ -141,17 +146,29 @@ export default {
     },
 
     save() {
-      this.$http.post("api/osiris/group", this.editedItem).then(response => {
-        console.log(response.data.data);
-        this.groups.push(this.editedItem);
-        this.dialog = false;
-      }, error => {
-        console.log(error);
-      });
+      if(this.editedIndex > -1 ) {
+        this.$http.patch("api/osiris/group", this.editedItem).then(response => {
+          console.log(response.data.data);
+          Object.assign(this.groups[this.editedIndex],this.editedItem);
+          this.close();
+        }, error => {
+          console.log(error);
+        });
+      } else {
+        this.$http.post("api/osiris/group", this.editedItem).then(response => {
+          console.log(response.data.data);
+          this.groups.push(response.data.data);
+          this.close();
+        }, error => {
+          console.log(error);
+        });
+      }
 
     },
     close() {
       this.dialog = false;
+      this.editedItem = Object.assign({}, this.defaultItem); 
+      this.editedIndex = -1;
     },
   }
 }

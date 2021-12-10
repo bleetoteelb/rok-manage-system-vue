@@ -21,9 +21,9 @@
                 </v-text-field>
               </v-col>
               <v-col xs12 sm6 md4> 
-                <v-text-field v-model="editedItem.key">
+                <v-text-field v-model="editedItem.accountNumber">
                   <template v-slot:label>
-                    전투력key <strong style="color:orangered;">*</strong>
+                    UID <strong style="color:orangered;">*</strong>
                   </template>
                 </v-text-field>
               </v-col>
@@ -63,11 +63,13 @@
         </td>
           </tr>
       </template>
+      <!--
       <template v-slot:item.edit="{ item }">
         <v-icon @click="editMember(item)">mdi-pencil</v-icon>
         /
         <v-icon @click="deleteMember(item)">mdi-delete</v-icon>
       </template>
+      -->
       </v-data-table>
     </v-container>
   </v-container>
@@ -78,21 +80,22 @@ export default {
   data: () => ({
     userList: [],
     headers: [
+//      { text: '_id', align: 'end', sortable: true, value: '_id',width:"170px" },
+      { text: '고유번호', align: 'end', sortable: true, value: 'accountNumber',width:"170px" },
       {
         text: '닉네임',
         sortable: true,
         value: 'nickname',
         width:"200px"
       },
-      { text: '_id', align: 'end', sortable: true, value: '_id',width:"170px" },
       { text: '오시그룹', align: 'end', sortable: true, value: 'group',width:"170px" },
-      { text: '10.05', align: 'end', sortable: true, value: 'power[0].value',width:"170px" },
-      { text: '10.21', align: 'end', sortable: true, value: 'power[1].value',width:"170px" },
+      { text: '전투력', align: 'end', sortable: true, value: 'power',width:"170px" },
+      { text: '사령관', align: 'end', sortable: true, value: 'commanders',width:"170px" },
       { text: '편집/삭제', sortable: true, value: 'edit',width:"170px" },
     ],
     editedItem: {
       nickname: "",
-      key: "",
+      accountNumber: "",
       power: ""
     },
     editedIndex: -1,
@@ -121,7 +124,7 @@ export default {
     save() {
       this.$http.post("api/member/", this.editedItem).then(response => {
         console.log(response.data.data);
-        this.userList.push(this.editeItem);
+        this.userList.push(this.editedItem);
         this.dialog=false;
       }, error => {
         console.log(error);

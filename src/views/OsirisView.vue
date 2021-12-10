@@ -81,8 +81,8 @@ export default {
     },
     addComma(power) {
       //const newone = (power.find(e => e.key === "11.05"));
-      if (power[0]) {
-        const num = power[0].value;
+      if (power) {
+        const num = power;
         var reg = /\B(?=(\d{3})+(?!\d))/g;
         return num.toString().replace(reg,',');
       } else {

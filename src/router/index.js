@@ -9,14 +9,6 @@ const routes = [
     redirect: { name: "osiris" }
   },
   {
-    path: '/member',
-    name: 'Member',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/MemberView.vue')
-  },
-  {
     path: '/osiris-register',
     name: 'osiris-register',
     // route level code-splitting
@@ -49,6 +41,30 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/MemberEditView.vue')
   },
   {
+    path: '/member-violate',
+    name: 'member-violate',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/MemberViolateView.vue')
+  },
+  {
+    path: '/member-violate-edit',
+    name: 'member-violate-edit',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/MemberViolateEditView.vue')
+  },
+  {
+    path: '/member-update',
+    name: 'member-update',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/MemberUpdateView.vue')
+  },
+  {
     path: '/osiris-edit',
     name: 'osiris-edit',
     component: () => import(/* webpackChunkName: "about" */ '../views/OsirisEditView.vue')
@@ -57,11 +73,6 @@ const routes = [
     path: '/profile-pictures',
     name: 'profile-pictures',
     component: () => import(/* webpackChunkName: "about" */ '../views/ProfilePictures.vue')
-  },
-  {
-    path: '/kvk',
-    name: 'kvk',
-    component: () => import(/* webpackChunkName: "about" */ '../views/KvkView.vue')
   },
   {
     path: '/test',

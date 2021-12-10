@@ -1,18 +1,15 @@
 <template>
   <div class="about">
     <h1>오시리스 신청 페이지</h1>
-    <div>현재 임시 디자인입니다.</div>
     <v-card v-if="openOsirisRegister">
       <v-card-text>
         <div class="display-1 text--primary">
           <p>오시리스 관</p>
         </div>
         <div>
-          <p style="color:red;">LS는 고정멤버만 신청 가능</p>
-          <p>-------[ 65LS : 일 (11/22) 23시 ]-------</p>
-          <p>-------[ 65MH : 일 (11/22) 21시 ]-------</p>
-          <p>-------[ 65AP : 토 (11/21) 22시 ]-------</p>
-          <p>-------[ 65NH : 토 (11/21) 23시 ]-------</p>
+          <template v-for="(item, i) in groups">
+            <p>-------- [  {{ item.name }} : {{ item.time }} ] -------- </p>
+          </template>
         </div>
         <br>
         <br>
@@ -97,6 +94,10 @@ export default {
       });
     },
     register() {
+      if(!this.members.find(e=>e.nickname === this.selectedMember).updated) {
+        alert('사령관 정보를 먼저 업데이트 하세요!'); 
+        return;
+      }
       if(this.dropdownMember.indexOf(this.selectedMember) == -1) {
         this.msg = `${this.selectedMember} 는 등록되어있지 않습니다. 맴매에게 문의해주세요`
         return;
@@ -106,8 +107,13 @@ export default {
         if(response.data.msg === "OVER"){
           this.msg = '신청인원이 초과되었습니다.';
           this.isOver=true;
-          alert('신청인원이 초과되었습니다.');
-        } else {
+          alert(this.msg);
+        } else if (response.data.msg === "BAN"){
+          console.log(response.data);
+          this.msg = `${this.selectedMember}님은 이번 오시리스관에 참여하실 수 없습니다.\n사유: ${response.data.data.reason}`;
+          this.isOver=true;
+          alert(this.msg);
+        }else {
           this.msg = `${this.selectedMember} 이 ${this.selectedGroup}에 등록되었습니다.`
           this.isOver=false;
         } 
