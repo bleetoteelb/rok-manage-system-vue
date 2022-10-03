@@ -63,13 +63,9 @@
         </td>
           </tr>
       </template>
-      <!--
       <template v-slot:item.edit="{ item }">
-        <v-icon @click="editMember(item)">mdi-pencil</v-icon>
-        /
         <v-icon @click="deleteMember(item)">mdi-delete</v-icon>
       </template>
-      -->
       </v-data-table>
     </v-container>
   </v-container>
@@ -136,6 +132,7 @@ export default {
     deleteMemberGroup(item) {
       this.$http({url:"api/osiris/member", method: 'DELETE', data: {_id: item._id}}).then(response => {
         this.dialog=false;
+        this.$router.go();
       }, error => {
         console.log(error);
       });
@@ -143,6 +140,7 @@ export default {
     deleteMember(item) {
       this.$http({url:"api/member", method: 'DELETE', data: {_id: item._id}}).then(response => {
         this.dialog=false;
+        this.$router.go();
       }, error => {
         console.log(error);
       });
