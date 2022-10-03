@@ -4,10 +4,10 @@
     <v-card>
       <v-card-text class="j-center">
         <!--
-          보병 : 제노비아, 카를 마르텔, 콘스탄티누스 1세, 하랄 3세, 관우, 알렉산더 대왕, 레오니다스 1세
-기병 : 항우, 야드비가,  찬드라굽타. 윌리엄, 아틸라, 다케다 신겐, 살라딘
-궁병 : 이성계 네부카드네자르 2세, 아르테미시스. 람세스 2세
-리더쉽 : 트라야누스, 이순신, 테오도라. 측천무후, 화목란
+          보병 : 제노비아, 카를 마르텔, 콘스탄티누스 1세, 하랄 3세, 관우, 알렉산더 대왕, 레오니다스 1세, 스키피오프라임, 아에티우스 플라비우스, 척준경
+기병 : 항우, 야드비가,  찬드라굽타. 윌리엄, 아틸라, 다케다 신겐, 살라딘, 알렉산드르 넵스키, 얀지슈카, 베르트랑 뒤 게클랭
+궁병 : 이성계 네부카드네자르 2세, 아르테미시스. 람세스 2세, 부디카 프라임, 헨리 5세
+리더쉽 : 트라야누스, 이순신, 테오도라. 측천무후, 화목란, 혼다 타다카ㅏ
         -->
         <div justify="center">
           <p align="center" style="color:blue;">검색되는 닉네임만 등록가능 (등록문의:그럴줄알고맴매챙겨따)</p>
@@ -186,6 +186,9 @@ export default {
       { "image":"martel", "name":"카를 마르텔", "selected":false },
       { "image":"zenobia", "name":"제노비아", "selected":false },
       { "image":"pacal", "name":"파칼 2세", "selected":false },
+      { "image":"scipio", "name":"스키피오 프라임", "selected":false },
+      { "image":"flavius", "name":"아에티우스 플라비우스", "selected":false },
+      { "image":"cheok", "name":"척준경", "selected":false },
       ],
     c_commanders:[
       { "image":"attila", "name":"아틸라", "selected":false },
@@ -196,6 +199,9 @@ export default {
       { "image":"takeda", "name":"다케다 신겐", "selected":false },
       { "image":"william", "name":"윌리엄 1세", "selected":false },
       { "image":"xiangyu", "name":"항우", "selected":false },
+      { "image":"nevsky", "name":"알렉산드르 넵스키", "selected":false },
+      { "image":"zizka", "name":"얀 지슈카", "selected":false },
+      { "image":"bertrand", "name":"베르트랑 뒤 게클랭", "selected":false },
       ],
     a_commanders:[
       { "image":"artemisia", "name":"아르테미시아", "selected":false },
@@ -204,6 +210,8 @@ export default {
       { "image":"ysg", "name":"이성계", "selected":false },
       { "image":"gilgamesh", "name":"길가메시", "selected":false },
       { "image":"amanitore", "name":"아마니토레", "selected":false },
+      { "image":"boudica", "name":"부디카 프라임", "selected":false },
+      { "image":"henry", "name":"헨리 5세", "selected":false },
       ],
     l_commanders:[
       { "image":"mulan", "name":"화목란", "selected":false },
@@ -211,6 +219,7 @@ export default {
       { "image":"trajan", "name":"트라야누스", "selected":false },
       { "image":"wuzetain", "name":"측천무후", "selected":false },
       { "image":"yisunsin", "name":"이순신", "selected":false },
+      { "image":"honda", "name":"혼다 타다카츠", "selected":false },
       ],
   }),
   created() {
